@@ -1,55 +1,82 @@
 import React from 'react';
-import { SectionHeader } from './SectionHeader';
-import { CONTENT } from '../constants';
+import { Section } from './ui/Section';
+import { Shield, TrendingUp, Users, Zap, Trophy, MessageCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const FeatureCard = ({ icon: Icon, title, description, className = "" }: any) => (
+  <div className={`p-8 rounded-3xl bg-karlon-surface border border-white/5 hover:border-white/10 transition-all duration-300 group ${className}`}>
+    <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform duration-300">
+      <Icon size={24} />
+    </div>
+    <h3 className="text-xl font-bold mb-3 text-white font-sans">{title}</h3>
+    <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+  </div>
+);
 
 export const Features: React.FC = () => {
-  const { features } = CONTENT;
-
   return (
-    <section id="features" className="py-24 bg-neutral-900 relative">
-      
-      {/* Background Grid Accent */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-white/5 skew-x-12 hidden lg:block"></div>
-      
-      {/* Chart line decorative background */}
-      <div className="absolute bottom-0 left-0 w-full h-64 opacity-10 pointer-events-none">
-         <svg viewBox="0 0 100 20" preserveAspectRatio="none" className="w-full h-full text-green-500 fill-current">
-            <path d="M0 20 L0 15 Q10 18 20 10 T40 12 T60 5 T80 8 T100 0 L100 20 Z" />
-         </svg>
-      </div>
+    <div className="bg-karlon-bg py-20" id="features">
+      <Section>
+        <div className="mb-20">
+          <h2 className="text-4xl md:text-5xl font-bold font-sans mb-6 tracking-tight">
+            Por que ter <span className="text-karlon-purple">$KARLON</span>?
+          </h2>
+          <p className="text-gray-400 text-lg max-w-2xl font-light">
+            Não é só sobre o gráfico. É sobre fazer parte da história da guilda.
+          </p>
+        </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <SectionHeader title={features.sectionTitle} subtitle={features.sectionSubtitle} />
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
-          {features.cards.map((feature, index) => (
-            <div 
-              key={index}
-              className="group relative p-6 bg-val-dark border border-white/10 hover:border-green-500 transition-all duration-300 hover:-translate-y-2"
-            >
-              <div className="absolute top-0 left-0 w-full h-1 bg-green-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-              
-              <div className="w-12 h-12 bg-white/5 rounded-sm flex items-center justify-center mb-6 group-hover:bg-green-500 group-hover:text-white transition-colors duration-300 text-green-500">
-                <feature.icon size={24} />
-              </div>
-              
-              <h3 className="text-xl font-display font-bold uppercase text-white mb-3">
-                {feature.title}
-              </h3>
-              
-              <p className="text-gray-400 text-sm leading-relaxed">
-                {feature.description}
-              </p>
+        {/* Grid Layout inspired by modern tech aesthetics */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          {/* Main Large Card */}
+          <div className="md:col-span-2 bg-gradient-to-br from-karlon-surface to-[#0f0f0f] rounded-3xl p-8 md:p-12 border border-white/5 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity">
+               <Shield size={200} />
             </div>
-          ))}
+            <div className="relative z-10">
+                <div className="w-14 h-14 bg-karlon-green text-black rounded-2xl flex items-center justify-center mb-8">
+                    <Users size={28} />
+                </div>
+                <h3 className="text-3xl font-bold mb-4">Comunidade Tanker</h3>
+                <p className="text-gray-400 text-lg max-w-lg leading-relaxed">
+                    Diferente de projetos que somem depois do respawn, a nossa força vem da comunidade que está na live todo dia. Somos uma guilda sólida construída em anos de gameplay.
+                </p>
+            </div>
+          </div>
+
+          <FeatureCard 
+            icon={TrendingUp}
+            title="Meme Driven"
+            description="O gráfico sobe, o gráfico desce, mas a zoeira é constante. A moeda é combustível para os melhores memes e clipes do canal."
+            className="bg-karlon-surface-highlight"
+          />
+
+          <FeatureCard 
+            icon={Trophy}
+            title="Cultura da Live"
+            description="Ter $KARLON na carteira é o equivalente digital a ter o crachá de VIP. É mostrar que você estava lá quando tudo começou."
+          />
+
+          <FeatureCard 
+            icon={Zap}
+            title="Fair Play"
+            description="Na Pump.fun, a regra é clara. Sem privilégios injustos. É PvP aberto e honesto para todos os players."
+          />
+
+          <div className="md:col-span-1 bg-karlon-purple text-white rounded-3xl p-8 border border-white/10 flex flex-col justify-between overflow-hidden relative">
+             <div className="absolute -bottom-4 -right-4 bg-white/20 w-32 h-32 rounded-full blur-2xl" />
+             <div>
+                <MessageCircle size={32} className="mb-6 opacity-80" />
+                <h3 className="text-xl font-bold mb-2">Utilidade Real</h3>
+                <p className="text-white/80 text-sm">
+                   Acesso a votações exclusivas e influência nos desafios do canal.
+                </p>
+             </div>
+          </div>
+
         </div>
-        
-        <div className="mt-12 text-center">
-            <p className="text-xs text-gray-500 uppercase tracking-widest font-mono">
-                {features.footerDisclaimer}
-            </p>
-        </div>
-      </div>
-    </section>
+      </Section>
+    </div>
   );
 };

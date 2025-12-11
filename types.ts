@@ -1,24 +1,21 @@
-import { LucideIcon } from 'lucide-react';
+import { ReactNode } from 'react';
 
-export interface NavItem {
-  label: string;
-  href: string;
+export interface SectionProps {
+  children: ReactNode;
+  className?: string;
+  id?: string;
 }
 
-export interface Feature {
+export interface FeatureCardProps {
+  icon: ReactNode;
   title: string;
   description: string;
-  icon: LucideIcon;
+  color?: 'green' | 'purple';
 }
 
-export interface RoadmapItem {
+export interface RoadmapItemProps {
   phase: string;
   title: string;
-  description: string;
-  status: 'completed' | 'current' | 'upcoming';
-}
-
-export interface FAQItem {
-  question: string;
-  answer: string;
+  items: string[];
+  status: 'completed' | 'current' | 'locked';
 }

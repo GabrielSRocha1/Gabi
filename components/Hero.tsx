@@ -1,69 +1,124 @@
-import React from 'react';
-import { Button } from './Button';
-import { ArrowRight, TrendingUp } from 'lucide-react';
-import { CONTENT } from '../constants';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Rocket, Copy, ImageOff } from 'lucide-react';
+import { Button } from './ui/Button';
 
 export const Hero: React.FC = () => {
-  const { hero } = CONTENT;
+  const [imageError, setImageError] = useState(false);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-val-dark z-0">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10 bg-[length:40px_40px]"></div>
-        
-        {/* Abstract Shapes */}
-        <div className="absolute top-20 right-0 w-96 h-96 bg-val-red opacity-10 blur-[100px] rounded-full"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-green-500 opacity-10 blur-[100px] rounded-full"></div>
-        
-        {/* Animated Lines */}
-        <div className="absolute top-1/4 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-        <div className="absolute bottom-1/4 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-      </div>
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-karlon-bg">
+      {/* Abstract Background - Roblox Style */}
+      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-karlon-purple/20 rounded-full blur-[120px] opacity-40" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-karlon-green/20 rounded-full blur-[120px] opacity-40" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         
-        {/* Floating Badges */}
-        <div className="mb-6 animate-bounce">
-            <span className="inline-block px-4 py-1 bg-green-500/20 border border-green-500 text-green-400 text-xs font-bold uppercase tracking-widest backdrop-blur-sm shadow-[0_0_15px_rgba(74,222,128,0.3)]">
-              {hero.badge}
+        {/* Content Side */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center lg:text-left space-y-8"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-medium text-karlon-green">
+            <span className="w-2 h-2 rounded-full bg-karlon-green animate-pulse" />
+            O DROP MAIS LENDÁRIO DO SERVIDOR
+          </div>
+          
+          <h1 className="font-sans font-extrabold text-5xl md:text-7xl leading-tight tracking-tight">
+            A Memecoin da <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-karlon-purple to-karlon-green">
+              Guilda $KARLON
             </span>
-        </div>
+          </h1>
+          
+          <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0 font-light">
+            Não é só hype. É a memecoin oficial da comunidade do Karlon Hill. 
+            Lançada na Pump.fun com fair play. Deixe de ser NPC e venha para o <span className="text-white font-medium">main character energy</span>.
+          </p>
 
-        {/* Main Title */}
-        <h1 className="text-7xl md:text-9xl font-display font-bold uppercase italic tracking-tighter text-white mb-2 leading-none relative">
-          {hero.titleStart}<span className="text-transparent bg-clip-text bg-gradient-to-r from-val-red to-green-400">{hero.titleEnd}</span>
-          <TrendingUp className="absolute -top-4 -right-12 text-green-500 opacity-80 hidden md:block" size={64} />
-        </h1>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+            <Button size="lg" variant="primary">
+              <Rocket className="w-5 h-5 mr-2" /> 
+              Comprar na Pump.fun
+            </Button>
+            <Button 
+              size="lg" 
+              variant="secondary" 
+              onClick={() => window.open('https://t.me/+nVWtiWKCuPI5NTQ5', '_blank')}
+            >
+              Telegram da Guilda
+            </Button>
+          </div>
+          
+          <div className="flex items-center justify-center lg:justify-start gap-4 text-xs text-gray-500 font-mono pt-4">
+            <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-md border border-white/5 cursor-pointer hover:bg-white/10 transition-colors">
+              <span>CA: 8xG...k92z</span>
+              <Copy size={12} />
+            </div>
+            <span>✅ Contrato Verificado</span>
+          </div>
+        </motion.div>
 
-        <p className="max-w-2xl mx-auto text-xl md:text-2xl text-gray-300 mb-10 font-body">
-          {hero.descriptionPrefix} <span className="text-green-400 font-bold">{hero.descriptionHighlight}</span> 
-          <br className="hidden md:block" /> {hero.descriptionSuffix}
-        </p>
+        {/* Visual Side - Token Identity Card */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative flex justify-center lg:justify-end"
+        >
+            <div className="relative w-full max-w-md aspect-square">
+                {/* Rotating Glow Ring */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-karlon-green via-purple-500 to-transparent blur-3xl opacity-30 animate-pulse" />
+                
+                {/* Main Card */}
+                <div className="relative h-full w-full bg-karlon-surface border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl flex flex-col">
+                    {/* Image Area */}
+                    <div className="h-3/4 relative overflow-hidden group bg-black/50 flex items-center justify-center">
+                        {!imageError ? (
+                          <img 
+                             src="https://i.ibb.co/hJ3FjD7J/thumbroblox.png" 
+                             alt="Karlon Avatar" 
+                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                             onError={() => setImageError(true)}
+                          />
+                        ) : (
+                          // Fallback UI if image fails to load
+                          <div className="w-full h-full bg-gradient-to-br from-gray-800 to-black flex flex-col items-center justify-center text-gray-500 p-8 text-center">
+                             <div className="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center mb-4">
+                                <span className="text-4xl font-bold text-white">K</span>
+                             </div>
+                             <span className="text-xs uppercase tracking-widest opacity-50 mb-2">Imagem não encontrada</span>
+                             <span className="text-[10px] opacity-30">Verifique se o arquivo se chama "thumbroblox.png" na pasta public</span>
+                          </div>
+                        )}
+                        
+                        {/* Overlay Gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-karlon-surface via-transparent to-transparent pointer-events-none" />
+                        
+                        {/* Floating Badge */}
+                        <div className="absolute top-6 right-6 bg-black/50 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full flex items-center gap-2 z-20">
+                             <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]" />
+                             <span className="text-xs font-bold tracking-widest text-white">ONLINE</span>
+                        </div>
+                    </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
-          <Button variant="primary" className="text-xl px-12 bg-green-600 hover:bg-green-700">
-            {hero.ctaPrimary} <ArrowRight className="inline-block ml-2" size={20} />
-          </Button>
-          <Button variant="outline" className="text-xl px-12">
-            {hero.ctaSecondary}
-          </Button>
-        </div>
-
-        {/* Decorative HUD Elements */}
-        <div className="absolute bottom-10 left-10 hidden md:flex flex-col gap-2">
-            <div className="w-24 h-1 bg-green-500 shadow-[0_0_10px_#22c55e]"></div>
-            <div className="w-12 h-1 bg-white/50"></div>
-            <div className="text-xs font-mono text-green-400">{hero.hudLeft}</div>
-        </div>
-        
-        <div className="absolute bottom-10 right-10 hidden md:flex flex-col items-end gap-2 text-right">
-            <div className="w-24 h-1 bg-val-red"></div>
-            <div className="text-xs font-mono text-white/50">{hero.hudRight}</div>
-        </div>
-
+                    {/* Info Area */}
+                    <div className="h-1/4 p-6 flex items-center justify-between bg-karlon-surface-highlight border-t border-white/5">
+                        <div>
+                            <h3 className="text-2xl font-bold font-sans tracking-tight">$KARLON</h3>
+                            <p className="text-gray-400 text-sm">Official Memecoin</p>
+                        </div>
+                        <div className="text-right">
+                            <p className="text-karlon-green font-mono font-bold text-lg">+9999%</p>
+                            <p className="text-gray-500 text-xs uppercase tracking-wider">Hype Level</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </motion.div>
       </div>
-    </section>
+    </div>
   );
 };

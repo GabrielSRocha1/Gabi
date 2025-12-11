@@ -148,7 +148,7 @@ export const CONTENT = {
   footer: {
     brand: "Gabi",
     brandHighlight: "Coin",
-    brandDescription: "A moeda que não vale nada, mas significa tudo para a nossa comunidade. Feito com caos e carinho.",
+    brandDescription: "A moeda oficial da comunidade. Feito para valorizar.",
     copyright: "© 2024 GabiCoin Community. All rights reserved (mostly).",
     disclaimer: "AVISO LEGAL: ESTE PROJETO É UMA OBRA DE FICÇÃO/MEME PARA FINS DE ENTRETENIMENTO. NÃO POSSUI VALOR INTRÍNSECO NEM EXPECTATIVA DE RETORNO FINANCEIRO."
   }
